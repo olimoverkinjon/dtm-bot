@@ -1,0 +1,10 @@
+[project]
+name = "dtm-bot"
+version = "0.1.0"
+description = "Telegram bot for user registration and lead collection"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.27.0",
+    "python-dotenv>=1.0.0",
+]
