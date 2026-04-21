@@ -14,7 +14,7 @@ from aiogram.filters import Command
 from aiohttp import web
 
 # 🔥 CONFIG
-API_TOKEN = os.getenv("API_TOKEN") or "YOUR_TOKEN"
+API_TOKEN = os.getenv("API_TOKEN") or "API_TOKEN = 8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw"
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME") or "@registan_abituriyent"
 GROUP_ID = int(os.getenv("GROUP_ID") or "-1003890628671")
 ADMIN_ID = int(os.getenv("ADMIN_ID") or "6653845419")  # o'zingni ID
