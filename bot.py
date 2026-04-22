@@ -28,7 +28,15 @@ import re
 API_TOKEN = os.getenv("API_TOKEN") or "8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw"
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME") or "@registan_abituriyent"
 GROUP_ID = int(os.getenv("GROUP_ID") or "-1003890628671")
-ADMIN_ID = int(os.getenv("ADMIN_ID") or "6653845419")
+
+# Admin IDs (multiple admins)
+ADMIN_IDS = [
+    int(os.getenv("ADMIN_ID") or "6653845419"),
+    int(os.getenv("ADMIN_ID_2") or "5240893523")
+]
+
+# Legacy single admin ID
+ADMIN_ID = ADMIN_IDS[0]
 
 # File paths for data storage (replaces PHP file operations)
 LEADS_FILE = Path(__file__).parent / "leads.json"
@@ -181,7 +189,7 @@ async def handle_admin(message: Message):
     user_id = message.from_user.id
     chat_id = message.chat.id
     
-    if user_id != ADMIN_ID:
+    if user_id not in ADMIN_IDS:
         return
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -260,11 +268,79 @@ async def handle_extra_phone(message: Message, state: FSMContext):
     await bot.send_message(GROUP_ID, text, parse_mode="HTML")
     
     # Confirm to user
-    await bot.send_message(chat_id, "✅ Ro'yxatdan o'tdingiz! Tez orada administratorlarimiz siz bilan bog'lanishadi.")
+    await bot.send_message(chat_id, "✅ Tabriklaymiz siz ro'yxatdan o'tdingiz! Tez orada siz bilan administratorlarimiz bog'lanishadi.")
     
     # Clear state
     await state.clear()
     delete_session(user_id)
+
+
+# ==================
+# 📸 MEDIA HANDLERS (Photos & Videos)
+# ==================
+
+@router.message(F.photo)
+async def handle_photo(message: Message):
+    """Handle photo messages"""
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    
+    # Forward photo to admin group
+    caption = (
+        f"📸 <b>Yangi RASM</b>\n\n"
+        f"👤 <b>User ID:</b> {user_id}\n"
+        f"📱 <b>Username:</b> {message.from_user.username or 'Yo\'q'}\n"
+        f"👤 <b>Ism:</b> {message.from_user.first_name} {message.from_user.last_name or ''}\n\n"
+        f"📝 <b>Rasm izohni:</b> {message.caption or 'Yo\'q'}"
+    )
+    
+    await bot.send_photo(GROUP_ID, message.photo[-1].file_id, caption=caption, parse_mode="HTML")
+    
+    # Confirm to user
+    await bot.send_message(chat_id, "✅ Rasmingiz administratorlarga yuborildi!")
+
+
+@router.message(F.video)
+async def handle_video(message: Message):
+    """Handle video messages"""
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    
+    # Forward video to admin group
+    caption = (
+        f"🎥 <b>Yangi VIDEO</b>\n\n"
+        f"👤 <b>User ID:</b> {user_id}\n"
+        f"📱 <b>Username:</b> {message.from_user.username or 'Yo\'q'}\n"
+        f"👤 <b>Ism:</b> {message.from_user.first_name} {message.from_user.last_name or ''}\n\n"
+        f"📝 <b>Video izohni:</b> {message.caption or 'Yo\'q'}"
+    )
+    
+    await bot.send_video(GROUP_ID, message.video.file_id, caption=caption, parse_mode="HTML")
+    
+    # Confirm to user
+    await bot.send_message(chat_id, "✅ Videongiz administratorlarga yuborildi!")
+
+
+@router.message(F.document)
+async def handle_document(message: Message):
+    """Handle document messages"""
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    
+    # Forward document to admin group
+    caption = (
+        f"📄 <b>Yangi DOKUMENT</b>\n\n"
+        f"👤 <b>User ID:</b> {user_id}\n"
+        f"📱 <b>Username:</b> {message.from_user.username or 'Yo\'q'}\n"
+        f"👤 <b>Ism:</b> {message.from_user.first_name} {message.from_user.last_name or ''}\n"
+        f"📁 <b>Fayl nomi:</b> {message.document.file_name}\n\n"
+        f"📝 <b>Izohni:</b> {message.caption or 'Yo\'q'}"
+    )
+    
+    await bot.send_document(GROUP_ID, message.document.file_id, caption=caption, parse_mode="HTML")
+    
+    # Confirm to user
+    await bot.send_message(chat_id, "✅ Dokumentingiz administratorlarga yuborildi!")
 
 
 # ==================
@@ -298,7 +374,7 @@ async def handle_stats(callback: CallbackQuery):
     user_id = callback.from_user.id
     chat_id = callback.message.chat.id
     
-    if user_id != ADMIN_ID:
+    if user_id not in ADMIN_IDS:
         await bot.answer_callback_query(callback.id, "❌ Faqat admin uchun!", show_alert=True)
         return
     
@@ -314,7 +390,7 @@ async def handle_leads(callback: CallbackQuery):
     user_id = callback.from_user.id
     chat_id = callback.message.chat.id
     
-    if user_id != ADMIN_ID:
+    if user_id not in ADMIN_IDS:
         await bot.answer_callback_query(callback.id, "❌ Faqat admin uchun!", show_alert=True)
         return
     

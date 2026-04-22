@@ -25,7 +25,15 @@ load_dotenv()
 API_TOKEN = os.getenv("API_TOKEN", "8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@registan_abituriyent")
 GROUP_ID = int(os.getenv("GROUP_ID", "-1003890628671"))
-ADMIN_ID = int(os.getenv("ADMIN_ID", "6653845419"))
+
+# Admin IDs (multiple admins supported)
+ADMIN_IDS = [
+    int(os.getenv("ADMIN_ID", "6653845419")),
+    int(os.getenv("ADMIN_ID_2", "5240893523"))
+]
+
+# Legacy single admin ID (for backward compatibility)
+ADMIN_ID = ADMIN_IDS[0]
 
 # File Storage Paths
 LEADS_FILE = Path(__file__).parent / "leads.json"
