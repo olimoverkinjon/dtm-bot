@@ -1,0 +1,34 @@
+{
+    "name": "dtm-bot/telegram-bot",
+    "description": "DTM Bot - Telegram User Registration Bot (PHP)",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "monolog/monolog": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "DTM Bot Developer",
+            "email": "dev@dtmbot.local"
+        }
+    ]
+}
+{
+    "name": "dtm-bot/telegram-bot",
+    "description": "DTM Bot - Telegram User Registration Bot (PHP)",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "monolog/monolog": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "DTM Bot Developer",
+            "email": "dev@dtmbot.local"
+        }
+    ]
+}

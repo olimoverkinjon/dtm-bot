@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:8.2-apache
+    container_name: dtm-bot-php
+    volumes:
+      - ./:/var/www/html
+      - ./.htaccess:/var/www/html/.htaccess
+    ports:
+      - "8080:80"
+    environment:
+      - API_TOKEN=${API_TOKEN}
+      - CHANNEL_USERNAME=${CHANNEL_USERNAME}
+      - GROUP_ID=${GROUP_ID}
+      - ADMIN_ID=${ADMIN_ID}
+    command: >
+      sh -c "
+        docker-php-ext-install curl &&
+        a2enmod rewrite &&
+        apache2-foreground
+      "
+    networks:
+      - dtm-network
+
+networks:
+  dtm-network:
+    driver: bridge

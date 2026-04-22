@@ -1,2 +1,18 @@
+# Core dependencies for DTM Bot (Python version)
+# Main bot framework
 aiogram>=3.27.0
+
+# Environment variables management
 python-dotenv>=1.0.0
+
+# HTTP client (used by aiogram)
+aiohttp>=3.9.0
+
+# Additional utilities
+pydantic>=2.0.0  # Data validation
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0
