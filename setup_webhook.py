@@ -19,7 +19,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuration
-API_TOKEN = os.getenv("API_TOKEN") or "8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw"
+API_TOKEN = os.getenv("API_TOKEN", "")
+if not API_TOKEN:
+    raise SystemExit("API_TOKEN topilmadi: .env faylga yoki environment variable'ga bot tokenini yozing (.env.example'ga qarang)")
 
 async def setup_webhook(webhook_url: str):
     """Set webhook and display configuration"""

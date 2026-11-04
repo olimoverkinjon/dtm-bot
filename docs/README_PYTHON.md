@@ -229,7 +229,7 @@ Tracks active user sessions:
 
 ```env
 # Required
-API_TOKEN=8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw
+J3456789:your_bot_token_here
 
 # Telegram Configuration
 CHANNEL_USERNAME=@registan_abituriyent

@@ -1,6 +1,12 @@
 import logging
 import asyncio
 import os
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 from aiogram import Bot, Dispatcher, types, Router, F
 from aiogram.types import (
     ReplyKeyboardMarkup, KeyboardButton,
@@ -14,7 +20,9 @@ from aiogram.filters import Command
 from aiohttp import web
 
 # 🔥 CONFIG
-API_TOKEN = os.getenv("API_TOKEN") or "API_TOKEN = 8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw"
+API_TOKEN = os.getenv("API_TOKEN", "")
+if not API_TOKEN:
+    raise SystemExit("API_TOKEN topilmadi: .env faylga yoki environment variable'ga bot tokenini yozing (.env.example'ga qarang)")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME") or "@registan_abituriyent"
 GROUP_ID = int(os.getenv("GROUP_ID") or "-1003890628671")
 ADMIN_ID = int(os.getenv("ADMIN_ID") or "6653845419")  # o'zingni ID

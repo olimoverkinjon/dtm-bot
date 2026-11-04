@@ -1,6 +1,6 @@
 <?php
 // 🔥 CONFIGURATION
-define('API_TOKEN', getenv('API_TOKEN') ?: '8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw');
+define('API_TOKEN', (getenv('API_TOKEN') ?: ''));
 define('CHANNEL_USERNAME', getenv('CHANNEL_USERNAME') ?: '@registan_abituriyent');
 define('GROUP_ID', getenv('GROUP_ID') ?: -1003890628671);
 define('ADMIN_ID', getenv('ADMIN_ID') ?: 6653845419);

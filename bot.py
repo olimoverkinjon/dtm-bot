@@ -5,6 +5,12 @@
 import logging
 import asyncio
 import os
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import json
 from datetime import datetime
 from pathlib import Path
@@ -25,7 +31,9 @@ import re
 # 🔥 CONFIGURATION
 # ==================
 
-API_TOKEN = os.getenv("API_TOKEN") or "8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw"
+API_TOKEN = os.getenv("API_TOKEN", "")
+if not API_TOKEN:
+    raise SystemExit("API_TOKEN topilmadi: .env faylga yoki environment variable'ga bot tokenini yozing (.env.example'ga qarang)")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME") or "@registan_abituriyent"
 GROUP_ID = int(os.getenv("GROUP_ID") or "-1003890628671")
 

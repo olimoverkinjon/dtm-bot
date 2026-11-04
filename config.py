@@ -22,7 +22,7 @@ load_dotenv()
 # ==================
 
 # Telegram API Configuration
-API_TOKEN = os.getenv("API_TOKEN", "8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw")
+API_TOKEN = os.getenv("API_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@registan_abituriyent")
 GROUP_ID = int(os.getenv("GROUP_ID", "-1003890628671"))
 

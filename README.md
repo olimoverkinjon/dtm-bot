@@ -1,55 +1,64 @@
 # DTM Bot
 
-Telegram bot for registering users in the Registan Abituriyent channel.
+Telegram bot that collects applicant registrations for the **Registan Abituriyent** channel.
 
-## Features
+> 🇺🇿 Registan Abituriyent kanali uchun abituriyentlarni ro'yxatga oluvchi Telegram bot.
 
-- Channel subscription verification
-- User registration form (name, phone numbers)
-- Lead collection to group chat
+## What it does
 
-## Requirements
+- Checks that the user is subscribed to the channel before registration
+- Step-by-step form: full name → phone (contact share) → extra phone
+- Sends every new lead to a private group chat and stores it in `leads.json`
+- `/admin` panel for admins: statistics and the list of leads
+- Forwards photos, videos and documents from users to the admin group
 
-- Python 3.12+
-- aiogram 3.27.0+
+## Tech stack
 
-## Installation
+- **Python version:** Python 3.12, [aiogram 3](https://docs.aiogram.dev/), aiohttp (`bot.py`, `main.py`)
+- **PHP version:** webhook-based, runs on Apache (`index.php`, `webhook.php`, `config.php`, `Dockerfile`)
 
-1. Clone the repository:
+## Quick start (Python)
+
 ```bash
-git clone https://github.com/yourusername/dtm-bot.git
+git clone https://github.com/olimoverkinjon/dtm-bot.git
 cd dtm-bot
-```
-
-2. Create a virtual environment:
-```bash
-python -m venv .venv
-.venv\Scripts\activate  # Windows
-source .venv/bin/activate  # Linux/Mac
-```
-
-3. Install dependencies:
-```bash
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-4. Configure environment variables:
-```bash
-cp .env.example .env
-# Edit .env with your actual values
-```
-
-5. Run the bot:
-```bash
-python dtm.py
+cp .env.example .env    # then fill in your values
+python main.py
 ```
 
 ## Configuration
 
-Create a `.env` file with the following variables:
-- `API_TOKEN`: Your Telegram bot token
-- `CHANNEL_USERNAME`: Channel username (e.g., @registan_abituriyent)
-- `GROUP_ID`: Group ID where leads are sent
+All secrets are read from environment variables (or a local `.env` file, which is git-ignored). Never commit a real token.
+
+| Variable | Description |
+|---|---|
+| `API_TOKEN` | Bot token from [@BotFather](https://t.me/BotFather) |
+| `CHANNEL_USERNAME` | Channel users must join, e.g. `@registan_abituriyent` |
+| `GROUP_ID` | Chat ID of the group that receives leads |
+| `ADMIN_ID`, `ADMIN_ID_2` | Telegram user IDs allowed to use `/admin` |
+| `BOT_MODE` | `polling` (default) or `webhook` |
+| `WEBHOOK_URL` | Required only in webhook mode |
+
+## Project structure
+
+```
+bot.py              # main bot logic (Python)
+main.py             # entry point
+config.py           # configuration loader
+setup_webhook.py    # registers the webhook URL
+status.py           # status dashboard
+index.php, webhook.php, config.php, status.php   # PHP version
+Dockerfile, docker-compose.yml                   # PHP container
+docs/               # deployment guides and migration notes
+```
+
+## Docs
+
+- [Getting started](docs/GETTING_STARTED.md)
+- [Deployment guide](docs/DEPLOYMENT_GUIDE.md)
+- [Python version details](docs/README_PYTHON.md) · [PHP version details](docs/README_PHP.md)
 
 ## License
 

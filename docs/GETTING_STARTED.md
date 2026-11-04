@@ -175,7 +175,7 @@ python admin_utils.py
 
 | Setting | Example | How to Get |
 |---------|---------|-----------|
-| API_TOKEN | `8516827967:AAH...` | From @BotFather |
+| API_TOKEN | `123456789:ABC...` | From @BotFather |
 | CHANNEL_USERNAME | `@my_channel` | Your channel name |
 | GROUP_ID | `-1003890628671` | From @userinfobot |
 | ADMIN_ID | `6653845419` | Send /start, check logs |

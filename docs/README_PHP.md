@@ -34,7 +34,7 @@ webhook.php        # Webhook setup script
 
 Create `.env` file with your credentials:
 ```
-API_TOKEN=8516827967:AAHDYsWDsYrsM3HBna24ceonbpM9a8zb_Yw
+J3456789:your_bot_token_here
 CHANNEL_USERNAME=@registan_abituriyent
 GROUP_ID=-1003890628671
 ADMIN_ID=6653845419
